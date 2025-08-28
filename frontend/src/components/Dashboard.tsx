@@ -1,0 +1,66 @@
+import React from 'react';
+import { Grid, Paper, Typography } from '@mui/material';
+import { Pipeline } from '../services/api';
+
+interface MetricsCardProps {
+  title: string;
+  value: string | number;
+  description?: string;
+}
+
+const MetricsCard: React.FC<MetricsCardProps> = ({ title, value, description }) => (
+  <Paper sx={{ p: 2, height: '100%' }}>
+    <Typography variant="h6" gutterBottom>
+      {title}
+    </Typography>
+    <Typography variant="h4" component="div">
+      {value}
+    </Typography>
+    {description && (
+      <Typography variant="body2" color="text.secondary">
+        {description}
+      </Typography>
+    )}
+  </Paper>
+);
+
+interface DashboardProps {
+  pipeline: Pipeline;
+  metrics: {
+    success_rate: number;
+    avg_build_time: number;
+    last_build_status: string;
+  };
+}
+
+export const Dashboard: React.FC<DashboardProps> = ({ pipeline, metrics }) => {
+  return (
+    <div>
+      <Typography variant="h4" gutterBottom>
+        {pipeline.name}
+      </Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={4}>
+          <MetricsCard
+            title="Success Rate"
+            value={`${(metrics.success_rate * 100).toFixed(1)}%`}
+            description="Last 7 days"
+          />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <MetricsCard
+            title="Average Build Time"
+            value={`${Math.round(metrics.avg_build_time)}s`}
+            description="Last 7 days"
+          />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <MetricsCard
+            title="Last Build Status"
+            value={metrics.last_build_status}
+          />
+        </Grid>
+      </Grid>
+    </div>
+  );
+};

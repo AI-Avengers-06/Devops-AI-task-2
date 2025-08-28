@@ -1,0 +1,54 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+
+    - name: Install Backend Dependencies
+      run: |
+        cd backend
+        npm install
+
+    - name: Build Backend
+      run: |
+        cd backend
+        npm run build
+
+    - name: Install Frontend Dependencies
+      run: |
+        cd frontend
+        npm install
+
+    - name: Build Frontend
+      run: |
+        cd frontend
+        npm run build
+
+    - name: Run Tests
+      run: |
+        cd backend
+        npm test
+        cd ../frontend
+        npm test
+
+    - name: Docker Build
+      run: docker-compose build
+
+    - name: Deploy
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "Add deployment steps here"

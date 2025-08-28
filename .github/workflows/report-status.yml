@@ -1,0 +1,29 @@
+name: Pipeline Health Reporter
+
+on:
+  workflow_run:
+    workflows: ["*"]
+    types: [completed]
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report Pipeline Status
+        env:
+          DASHBOARD_URL: ${{ secrets.DASHBOARD_URL }}
+        run: |
+          START_TIME="${{ github.event.workflow_run.created_at }}"
+          END_TIME="${{ github.event.workflow_run.updated_at }}"
+          STATUS="${{ github.event.workflow_run.conclusion }}"
+          
+          # Send data to dashboard
+          curl -X POST "${DASHBOARD_URL}/api/pipelines/webhook" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"pipeline_id\": 1,
+              \"status\": \"${STATUS}\",
+              \"start_time\": \"${START_TIME}\",
+              \"end_time\": \"${END_TIME}\",
+              \"logs\": \"Workflow: ${{ github.event.workflow_run.name }}\nRun URL: ${{ github.event.workflow_run.html_url }}\"
+            }"
