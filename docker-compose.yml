@@ -8,7 +8,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=postgres://user:password@db:5432/pipeline_dashboard
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/pipeline_dashboard
       - NODE_ENV=development
     depends_on:
       - db
@@ -31,13 +31,14 @@ services:
   db:
     image: postgres:13
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=pipeline_dashboard
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./backend/src/db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   pgdata:

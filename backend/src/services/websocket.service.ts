@@ -1,12 +1,13 @@
 import { Server as WebSocketServer } from 'ws';
+import { WebSocket } from 'ws';
 import { Server } from 'http';
 
 let wss: WebSocketServer;
 
-export const initializeWebSocket = (server: Server) => {
+export const initializeWebSocket = (server: Server): void => {
   wss = new WebSocketServer({ server });
 
-  wss.on('connection', (ws) => {
+  wss.on('connection', (ws: WebSocket) => {
     console.log('New client connected');
 
     ws.on('close', () => {
@@ -15,13 +16,13 @@ export const initializeWebSocket = (server: Server) => {
   });
 };
 
-export const broadcastUpdate = (data: any) => {
+export const broadcastUpdate = (data: unknown): void => {
   if (!wss) {
     return;
   }
 
-  wss.clients.forEach((client) => {
-    if (client.readyState === 1) { // WebSocket.OPEN
+  wss.clients.forEach((client: WebSocket) => {
+    if (client.readyState === WebSocket.OPEN) {
       client.send(JSON.stringify(data));
     }
   });
