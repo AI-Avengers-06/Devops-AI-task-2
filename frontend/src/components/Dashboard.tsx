@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid2, Paper, Typography } from '@mui/material';
+import { Paper, Typography, Box } from '@mui/material';
 
 // Local type definition to avoid import issues
 interface Pipeline {
@@ -47,28 +47,32 @@ export const Dashboard: React.FC<DashboardProps> = ({ pipeline, metrics }) => {
       <Typography variant="h4" gutterBottom>
         {pipeline.name}
       </Typography>
-      <Grid2 container spacing={3}>
-        <Grid2 xs={12} md={4}>
-          <MetricsCard
-            title="Success Rate"
-            value={`${(metrics.success_rate * 100).toFixed(1)}%`}
-            description="Last 7 days"
-          />
-        </Grid2>
-        <Grid2 xs={12} md={4}>
-          <MetricsCard
-            title="Average Build Time"
-            value={`${Math.round(metrics.avg_build_time)}s`}
-            description="Last 7 days"
-          />
-        </Grid2>
-        <Grid2 xs={12} md={4}>
-          <MetricsCard
-            title="Last Build Status"
-            value={metrics.last_build_status}
-          />
-        </Grid2>
-      </Grid2>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 3,
+          '& > *': {
+            flex: '1 1 300px',
+            minWidth: '300px',
+          },
+        }}
+      >
+        <MetricsCard
+          title="Success Rate"
+          value={`${(metrics.success_rate * 100).toFixed(1)}%`}
+          description="Last 7 days"
+        />
+        <MetricsCard
+          title="Average Build Time"
+          value={`${Math.round(metrics.avg_build_time)}s`}
+          description="Last 7 days"
+        />
+        <MetricsCard
+          title="Last Build Status"
+          value={metrics.last_build_status}
+        />
+      </Box>
     </div>
   );
 };
