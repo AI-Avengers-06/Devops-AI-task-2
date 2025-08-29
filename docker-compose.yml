@@ -37,6 +37,8 @@ services:
     volumes:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
+    environment:
+      - VITE_API_URL=https://${CODESPACE_NAME}-3000.app.github.dev
     depends_on:
       - backend
 
