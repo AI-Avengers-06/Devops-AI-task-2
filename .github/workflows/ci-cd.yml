@@ -47,13 +47,13 @@ jobs:
       working-directory: ./backend
       run: npm run build
 
-    - name: Run backend tests
+      - name: Run backend tests
       working-directory: ./backend
-      run: npm test
+      run: |
+        echo "DATABASE_URL=postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASSWORD }}@localhost:5432/${{ env.POSTGRES_DB }}" > .env
+        npm test
       env:
-        DATABASE_URL: postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASSWORD }}@localhost:5432/${{ env.POSTGRES_DB }}
-
-    # Frontend build and test
+        NODE_ENV: test    # Frontend build and test
     - name: Install frontend dependencies
       working-directory: ./frontend
       run: npm install
