@@ -27,7 +27,7 @@ const BuildStatusChart: React.FC<BuildStatusChartProps> = ({ data = [] }) => {
   const last10Builds = data.slice(-10);
   
   const chartData = {
-    labels: last10Builds.map((build, index) => `Build ${index + 1}`),
+    labels: last10Builds.map((_, index) => `Build ${index + 1}`),
     datasets: [
       {
         label: 'Build Status',

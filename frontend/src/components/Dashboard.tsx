@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Paper, Typography } from '@mui/material';
+import { Grid2, Paper, Typography } from '@mui/material';
 
 // Local type definition to avoid import issues
 interface Pipeline {
@@ -47,28 +47,28 @@ export const Dashboard: React.FC<DashboardProps> = ({ pipeline, metrics }) => {
       <Typography variant="h4" gutterBottom>
         {pipeline.name}
       </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
+      <Grid2 container spacing={3}>
+        <Grid2 xs={12} md={4}>
           <MetricsCard
             title="Success Rate"
             value={`${(metrics.success_rate * 100).toFixed(1)}%`}
             description="Last 7 days"
           />
-        </Grid>
-        <Grid item xs={12} md={4}>
+        </Grid2>
+        <Grid2 xs={12} md={4}>
           <MetricsCard
             title="Average Build Time"
             value={`${Math.round(metrics.avg_build_time)}s`}
             description="Last 7 days"
           />
-        </Grid>
-        <Grid item xs={12} md={4}>
+        </Grid2>
+        <Grid2 xs={12} md={4}>
           <MetricsCard
             title="Last Build Status"
             value={metrics.last_build_status}
           />
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </div>
   );
 };
