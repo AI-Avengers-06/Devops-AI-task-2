@@ -47,6 +47,11 @@ jobs:
       working-directory: ./backend
       run: npm run build
 
+    - name: Initialize database
+      working-directory: ./backend
+      run: |
+        PGPASSWORD=${{ env.POSTGRES_PASSWORD }} psql -h localhost -U ${{ env.POSTGRES_USER }} -d ${{ env.POSTGRES_DB }} -f src/db/init.sql
+
     - name: Run backend tests
       working-directory: ./backend
       run: |
