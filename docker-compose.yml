@@ -14,6 +14,13 @@ services:
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
       - NODE_ENV=development
+      # Alert configurations
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL:-}
+      - SMTP_HOST=${SMTP_HOST:-smtp.gmail.com}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASS=${SMTP_PASS:-}
+      - ALERT_EMAIL_RECIPIENTS=${ALERT_EMAIL_RECIPIENTS:-}
     depends_on:
       db:
         condition: service_healthy
