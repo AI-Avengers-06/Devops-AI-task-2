@@ -9,8 +9,9 @@ interface NotificationPayload {
 
 export const sendSlackNotification = async (payload: NotificationPayload) => {
   const webhookUrl = process.env.SLACK_WEBHOOK_URL;
-  if (!webhookUrl) {
-    throw new Error('Slack webhook URL not configured');
+  if (!webhookUrl || webhookUrl.trim() === '') {
+    console.log('Slack webhook URL not configured, skipping Slack notification');
+    return;
   }
 
   const message = {

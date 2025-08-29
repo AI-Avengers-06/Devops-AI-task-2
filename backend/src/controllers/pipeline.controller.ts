@@ -46,12 +46,35 @@ export const getPipelineMetrics = async (req: Request, res: Response) => {
   }
 };
 
+export const getExecutionLogs = async (req: Request, res: Response) => {
+  const { executionId } = req.params;
+  try {
+    const result = await pool.query(
+      'SELECT logs FROM executions WHERE id = $1',
+      [executionId]
+    );
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Execution not found' });
+    }
+    
+    res.json({ logs: result.rows[0].logs || 'No logs available' });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 export const getExecutions = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { limit = 10, offset = 0 } = req.query;
   try {
     const result = await pool.query(
-      'SELECT * FROM executions WHERE pipeline_id = $1 ORDER BY start_time DESC LIMIT $2 OFFSET $3',
+      `SELECT *, 
+       EXTRACT(EPOCH FROM (end_time - start_time))::integer as duration_seconds 
+       FROM executions 
+       WHERE pipeline_id = $1 
+       ORDER BY start_time DESC 
+       LIMIT $2 OFFSET $3`,
       [id, limit, offset]
     );
     res.json(result.rows);

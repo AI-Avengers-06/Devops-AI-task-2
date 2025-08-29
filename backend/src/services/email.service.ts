@@ -18,6 +18,14 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendEmailNotification = async (payload: NotificationPayload) => {
+  // Check if SMTP is properly configured
+  if (!process.env.SMTP_USER || !process.env.SMTP_PASS || process.env.SMTP_PASS === 'your_app_password') {
+    console.log('📧 Email notification skipped - SMTP credentials not configured');
+    console.log(`Would send email to: ${process.env.ALERT_EMAIL_RECIPIENTS}`);
+    console.log(`Subject: Pipeline Alert: ${payload.pipelineName} - ${payload.status}`);
+    return;
+  }
+
   const mailOptions = {
     from: process.env.SMTP_USER,
     to: process.env.ALERT_EMAIL_RECIPIENTS,
@@ -34,6 +42,7 @@ export const sendEmailNotification = async (payload: NotificationPayload) => {
 
   try {
     await transporter.sendMail(mailOptions);
+    console.log('Email notification sent successfully');
   } catch (error) {
     console.error('Failed to send email notification:', error);
     throw error;
