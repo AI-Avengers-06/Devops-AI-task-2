@@ -8,10 +8,15 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/pipeline_dashboard
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=pipeline_dashboard
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
       - NODE_ENV=development
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
@@ -38,6 +43,12 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./backend/src/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
       - ./backend/src/db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
