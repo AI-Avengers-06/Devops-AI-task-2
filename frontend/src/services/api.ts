@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+const API_URL = '/api';
 
+// Type definitions
 export interface Pipeline {
   id: number;
   name: string;
@@ -42,6 +43,11 @@ export const api = {
     const response = await axios.get<Execution[]>(
       `${API_URL}/pipelines/${id}/executions?limit=${limit}&offset=${offset}`
     );
+    return response.data;
+  },
+
+  async getExecutionLogs(executionId: number) {
+    const response = await axios.get<{ logs: string }>(`${API_URL}/pipelines/executions/${executionId}/logs`);
     return response.data;
   }
 };

@@ -35,10 +35,7 @@ function App() {
 
     fetchData();
 
-    // Set up WebSocket connection
-    wsService.connect();
-
-    // Listen for new executions
+    // Define WebSocket event handler
     const handleNewExecution = async (data: Execution) => {
       if (pipeline && data.pipeline_id === pipeline.id) {
         setExecutions(prev => [data, ...prev]);
@@ -47,7 +44,18 @@ function App() {
       }
     };
 
-    wsService.addEventListener('EXECUTION_CREATED', handleNewExecution);
+    // Set up WebSocket connection with error handling
+    // Skip WebSocket if explicitly disabled
+    if (import.meta.env.VITE_DISABLE_WEBSOCKET !== 'true') {
+      try {
+        wsService.connect();
+        wsService.addEventListener('EXECUTION_CREATED', handleNewExecution);
+      } catch (error) {
+        console.warn('WebSocket initialization failed - continuing without real-time updates:', error);
+      }
+    } else {
+      console.log('WebSocket disabled via environment variable');
+    }
 
     return () => {
       wsService.removeEventListener('EXECUTION_CREATED', handleNewExecution);

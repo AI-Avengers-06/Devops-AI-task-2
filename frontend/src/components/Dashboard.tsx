@@ -1,6 +1,14 @@
 import React from 'react';
 import { Grid, Paper, Typography } from '@mui/material';
-import type { Pipeline } from '../services/api';
+
+// Local type definition to avoid import issues
+interface Pipeline {
+  id: number;
+  name: string;
+  repository: string;
+  created_at: string;
+  updated_at: string;
+}
 
 interface MetricsCardProps {
   title: string;
