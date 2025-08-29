@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Paper, Typography } from '@mui/material';
-import { Pipeline } from '../services/api';
+import type { Pipeline } from '../services/api';
 
 interface MetricsCardProps {
   title: string;
