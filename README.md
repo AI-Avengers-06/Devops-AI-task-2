@@ -114,7 +114,21 @@ npm run dev
 - ✅ Environment configuration
 - ✅ Health monitoring endpoints
 
-## 📊 API Endpoints
+## � Dashboard Preview
+
+Here's what the live dashboard looks like in action:
+
+![DevOps Pipeline Dashboard](Screenshot%202025-08-31%20at%205.38.16%20PM.png)
+
+The dashboard displays:
+- **Pipeline Overview**: Main Pipeline status with key metrics
+- **Success Rate**: Current 50.0% success rate over the last 7 days
+- **Average Build Time**: 970s average build duration
+- **Last Build Status**: Latest execution status (success/failure)
+- **Recent Executions**: Detailed execution history with timestamps, durations, and action buttons
+- **View Logs**: Interactive buttons to access detailed execution logs for troubleshooting
+
+## �📊 API Endpoints
 
 ### Pipeline Management
 - `GET /api/pipelines` - List all pipelines
