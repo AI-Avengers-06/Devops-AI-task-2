@@ -1,6 +1,10 @@
 # DevOps AI Pipeline Dashboard
 
-A comprehensive CI/CD Pipeline Health Dashboard built with AI assistance to monitor GitHub Actions workflow executions, providing real-time metrics, alerts, and visualization.
+A comprehensive CI/CD Pipeline Health Dashboard built with AI assistance to monitor ## 📱 Dashboard Preview
+
+Here's what the live dashboard looks like in action:
+
+![DevOps Pipeline Dashboard](dashboard-screenshot.png)b Actions workflow executions, providing real-time metrics, alerts, and visualization.
 
 ## 🚀 Setup & Run Instructions
 
