@@ -1,0 +1,27 @@
+# Example Terraform variables for customization
+# Copy this file to terraform.tfvars and modify as needed
+
+# AWS Configuration
+aws_region = "us-east-1"
+project_name = "devops-dashboard"
+environment = "prod"
+
+# EC2 Configuration
+instance_type = "t3.medium"
+key_pair_name = "devops-dashboard-key"
+
+# Network Configuration
+vpc_cidr = "10.0.0.0/16"
+public_subnet_cidr = "10.0.1.0/24"
+private_subnet_cidr = "10.0.2.0/24"
+
+# Security Configuration (Change to your IP for better security)
+admin_cidr = "0.0.0.0/0"
+
+# Database Configuration
+db_instance_class = "db.t3.micro"
+db_allocated_storage = 20
+db_max_allocated_storage = 100
+db_name = "pipeline_dashboard"
+db_username = "postgres"
+db_password = "SecurePassword123!"  # Change this to a secure password
