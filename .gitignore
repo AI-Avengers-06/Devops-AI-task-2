@@ -23,3 +23,20 @@ Thumbs.db
 
 # Docker volumes
 pgdata/
+
+# Terraform files (sensitive)
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+
+# AWS credentials and keys
+*.csv
+*.pem
+aws/
+awscliv2.zip
+
+# Sensitive configuration
+*accessKeys*
+*credentials*
