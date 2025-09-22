@@ -93,33 +93,38 @@ echo "Backend API URL: $(terraform output -raw backend_api_url)"
 echo "SSH Command: $(terraform output -raw ssh_connection)"
 ```
 
-## ✅ Current Live Deployment Status
+## ✅ Deployment Information
 
-### Successfully Deployed Infrastructure
-**🌐 Live Application: http://54.152.92.148:5173**
+### Successfully Tested Infrastructure
+**🚀 Cloud-Ready Application with Terraform IaC**
 
-#### Deployment Details (September 18, 2025)
-- **Public IP**: 54.152.92.148
-- **Frontend**: http://54.152.92.148:5173 ✅ LIVE
-- **Backend API**: http://54.152.92.148:3000/health ✅ LIVE
-- **Database**: RDS PostgreSQL (private subnet) ✅ CONNECTED
-- **Infrastructure Status**: All components operational
+#### Infrastructure Capabilities
+- **EC2 Instance**: t3.micro with automated Docker deployment
+- **RDS PostgreSQL**: Managed database in private subnet
+- **VPC Networking**: Public/private subnets with security groups
+- **Auto Deployment**: Complete user_data script automation
 
-#### Validation Results
+#### Previous Deployment Validation
 ```bash
-✅ Server Reachability: PASSED
-✅ Frontend Accessibility: HTTP 200
-✅ Backend API Health: {"status":"ok"}
+✅ Server Reachability: TESTED
+✅ Frontend Accessibility: VERIFIED
+✅ Backend API Health: CONFIRMED
 ✅ Database Connectivity: ESTABLISHED
-✅ Container Status: All running
-✅ Pipeline Selector: 6 pipelines available
+✅ Container Status: OPERATIONAL
+✅ Pipeline Selector: 6 pipelines functional
 ```
 
-#### Performance Metrics
+#### Performance Characteristics
 - **Application Load Time**: <2 seconds
 - **API Response Time**: <100ms average
 - **Database Queries**: Optimized with indexing
-- **Real-time Updates**: WebSocket connections active
+- **Real-time Updates**: WebSocket connections supported
+
+#### Deployment Steps
+1. Run `terraform apply` in `/infra` directory
+2. Wait 5-10 minutes for complete provisioning
+3. Access application at `http://YOUR_EC2_PUBLIC_IP:5173`
+4. Run `terraform destroy` when finished to avoid charges
 
 ---
 

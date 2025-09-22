@@ -4,11 +4,11 @@ A comprehensive CI/CD Pipeline Health Dashboard built with AI assistance to moni
 
 ## 🚀 Setup & Run Instructions
 
-## ☁️ **Live Cloud Deployment (AWS)**
+## ☁️ **Cloud Deployment (AWS)**
 
-**🌐 Access the Live Dashboard: http://54.152.92.148:5173**
+**🚀 Ready for Cloud Deployment with Terraform**
 
-The application is successfully deployed on AWS using Infrastructure-as-Code (Terraform):
+The application can be deployed to AWS using Infrastructure-as-Code (Terraform):
 - **Frontend**: React dashboard running on EC2
 - **Backend**: Node.js API with PostgreSQL RDS
 - **Infrastructure**: VPC, Security Groups, Load Balancing
@@ -31,9 +31,9 @@ terraform init
 terraform plan
 terraform apply
 
-# Access the application
-# Live Dashboard: http://54.152.92.148:5173
-# API Health: http://54.152.92.148:3000/health
+# Access the application (after deployment)
+# Dashboard: http://YOUR_EC2_PUBLIC_IP:5173
+# API Health: http://YOUR_EC2_PUBLIC_IP:3000/health
 ```
 
 ### Local Development
@@ -200,13 +200,13 @@ Devops-AI-task-2/
 └── 📄 README.md           # This file
 ```
 
-## 🌐 Live Deployment
+## 🌐 Cloud Deployment
 
-**🚀 Current Status: LIVE ON AWS**
-- **Dashboard**: http://54.152.92.148:5173
-- **API Health**: http://54.152.92.148:3000/health
-- **Infrastructure**: Fully automated with Terraform
-- **Deployment Date**: September 18, 2025
+**🚀 Status: Ready for Deployment**
+- **Infrastructure**: Complete Terraform automation available
+- **Deployment**: Run `terraform apply` to deploy to AWS
+- **Cost**: ~$50/month for EC2 + RDS (destroy when not needed)
+- **Documentation**: Complete deployment guide available
 
 ## 📱 Dashboard Preview
 

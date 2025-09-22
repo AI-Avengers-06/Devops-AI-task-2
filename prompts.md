@@ -279,7 +279,7 @@ yum install -y docker
 - **EC2 Instance**: t3.micro running containerized application
 - **RDS PostgreSQL**: Managed database with SSL connections
 - **Security Groups**: Properly configured firewall rules
-- **Application**: Live at http://54.152.92.148:5173
+- **Application**: Successfully deployed and tested (infrastructure now decommissioned to avoid charges)
 
 ### ✅ AI-Generated Code Statistics:
 - **Terraform Scripts**: 500+ lines of infrastructure code
